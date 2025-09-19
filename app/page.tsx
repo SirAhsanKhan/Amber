@@ -4,6 +4,10 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import ResponsiveHeader from "@/components/responsive-header"
+import About from "@/components/about-home"
+import Contact from "@/components/contact-home"
+import Booking from "@/components/booking-home"
+
 
 
 
@@ -102,6 +106,10 @@ export default function Home() {
         </div>
       </section>
 
+      <About /> 
+      <Booking /> 
+      <Contact /> 
+
       {/* Footer */}
       <footer className="bg-purple-700 text-white py-10 mt-auto">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
@@ -143,6 +151,9 @@ export default function Home() {
           © {new Date().getFullYear()} Amber Education Consultants. All Rights Reserved.
         </div>
       </footer>
+
     </div>
+    
+
   )
 }

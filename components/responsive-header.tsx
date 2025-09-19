@@ -21,6 +21,7 @@ export default function ResponsiveHeader() {
     <header className="fixed top-0 w-full bg-white shadow-lg z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between p-4">
         {/* Logo */}
+        <a href="/">
         <div className="flex items-center space-x-3">
           <Image
             src="/images/amber-logo.png"
@@ -31,6 +32,7 @@ export default function ResponsiveHeader() {
           />
           <span className="font-bold text-xl text-gray-800">Amber Education</span>
         </div>
+        </a>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-6 text-gray-700 font-medium">

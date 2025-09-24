@@ -1,7 +1,8 @@
 "use client"
 
-import type React from "react"
 
+
+import type React from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -12,7 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox"
 import { useState } from "react"
 import ResponsiveHeader from "@/components/responsive-header"
-
+import emailjs from "emailjs-com"
 
 export default function Booking() {
   const [formData, setFormData] = useState({
@@ -30,11 +31,24 @@ export default function Booking() {
     agreeToTerms: false,
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
-    // Handle form submission here
-  }
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault()
+
+  emailjs
+    .send(
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+      formData,
+      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+    )
+    .then(() => {
+      alert("Your consultation booking has been sent successfully ✅")
+    })
+    .catch((error) => {
+      console.error("EmailJS Error:", error)
+      alert("Oops! Something went wrong. Please try again ❌")
+    })
+}
 
   return (
     <div className="min-h-screen flex flex-col">

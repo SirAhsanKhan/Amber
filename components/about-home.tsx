@@ -128,35 +128,6 @@ export default function About() {
           </div>
         </div>
       </section>
-
-      {/* Team Section */}
-      <section className="max-w-7xl mx-auto py-20 px-6">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Meet Our Expert Team</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {[
-            { name: "Sarah Johnson", role: "Senior Visa Consultant", experience: "12+ years" },
-            { name: "Michael Chen", role: "Study Abroad Specialist", experience: "10+ years" },
-            { name: "Priya Sharma", role: "Scholarship Advisor", experience: "8+ years" },
-          ].map((member, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.2 }}
-            >
-              <Card className="shadow-lg rounded-2xl text-center">
-                <CardContent className="p-6">
-                  <div className="w-24 h-24 bg-gradient-to-br from-purple-400 to-green-400 rounded-full mx-auto mb-4"></div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">{member.name}</h3>
-                  <p className="text-purple-600 font-medium mb-2">{member.role}</p>
-                  <p className="text-gray-600 text-sm">{member.experience}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-    </div>
+  </div>
   )
 }

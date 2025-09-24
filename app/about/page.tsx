@@ -84,79 +84,68 @@ export default function About() {
       </section>
 
       {/* Values Section */}
-      <section className="bg-gray-50 py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Our Core Values</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Reliability",
-                desc: "We are your trusted partner throughout your educational journey, providing consistent support and guidance.",
-                color: "purple",
-              },
-              {
-                title: "Ambition",
-                desc: "We share your ambitious dreams and work tirelessly to help you achieve goals that seemed impossible.",
-                color: "green",
-              },
-              {
-                title: "Global Vision",
-                desc: "Our extensive network across 150+ countries ensures you have access to the best opportunities worldwide.",
-                color: "yellow",
-              },
-            ].map((value, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.2 }}
+<section className="bg-gray-50 py-20">
+  <div className="max-w-7xl mx-auto px-6">
+    <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
+      Our Core Values
+    </h2>
+    <div className="grid md:grid-cols-3 gap-8">
+      {[
+        {
+          title: "Reliability",
+          desc: "We are your trusted partner throughout your educational journey, providing consistent support and guidance.",
+          colorClasses: {
+            outer: "bg-purple-100",
+            inner: "bg-purple-600",
+            text: "text-purple-600",
+          },
+        },
+        {
+          title: "Ambition",
+          desc: "We share your ambitious dreams and work tirelessly to help you achieve goals that seemed impossible.",
+          colorClasses: {
+            outer: "bg-green-100",
+            inner: "bg-green-600",
+            text: "text-green-600",
+          },
+        },
+        {
+          title: "Global Vision",
+          desc: "Our extensive network across 150+ countries ensures you have access to the best opportunities worldwide.",
+          colorClasses: {
+            outer: "bg-yellow-100",
+            inner: "bg-yellow-600",
+            text: "text-yellow-600",
+          },
+        },
+      ].map((value, idx) => (
+        <motion.div
+          key={idx}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: idx * 0.2 }}
+        >
+          <Card className="shadow-xl rounded-2xl h-full">
+            <CardContent className="p-8 text-center">
+              <div
+                className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center ${value.colorClasses.outer}`}
               >
-                <Card className="shadow-xl rounded-2xl h-full">
-                  <CardContent className="p-8 text-center">
-                    <div
-                      className={`w-16 h-16 mx-auto mb-4 rounded-full bg-${value.color}-100 flex items-center justify-center`}
-                    >
-                      <div className={`w-8 h-8 bg-${value.color}-600 rounded-full`}></div>
-                    </div>
-                    <h3 className={`text-xl font-semibold text-${value.color}-600 mb-4`}>{value.title}</h3>
-                    <p className="text-gray-600 leading-relaxed">{value.desc}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="max-w-7xl mx-auto py-20 px-6">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Meet Our Expert Team</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {[
-            { name: "Sarah Johnson", role: "Senior Visa Consultant", experience: "12+ years" },
-            { name: "Michael Chen", role: "Study Abroad Specialist", experience: "10+ years" },
-            { name: "Priya Sharma", role: "Scholarship Advisor", experience: "8+ years" },
-          ].map((member, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.2 }}
-            >
-              <Card className="shadow-lg rounded-2xl text-center">
-                <CardContent className="p-6">
-                  <div className="w-24 h-24 bg-gradient-to-br from-purple-400 to-green-400 rounded-full mx-auto mb-4"></div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">{member.name}</h3>
-                  <p className="text-purple-600 font-medium mb-2">{member.role}</p>
-                  <p className="text-gray-600 text-sm">{member.experience}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+                <div
+                  className={`w-8 h-8 rounded-full ${value.colorClasses.inner}`}
+                ></div>
+              </div>
+              <h3 className={`text-xl font-semibold mb-4 ${value.colorClasses.text}`}>
+                {value.title}
+              </h3>
+              <p className="text-gray-600 leading-relaxed">{value.desc}</p>
+            </CardContent>
+          </Card>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* CTA Section */}
       <section className="bg-gradient-to-r from-purple-600 to-green-600 py-16">

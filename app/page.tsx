@@ -51,6 +51,40 @@ export default function Home() {
           </Button>
         </motion.div>
       </section>
+      {/* Country Section */}
+<section id="about" className="max-w-7xl mx-auto py-20 px-6">
+  
+  <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+    {[
+      { title: "France" },
+      { title: "Turkey" },
+      { title: "Sweden" },
+      { title: "Netherlands" },
+      { title: "Singapore" },
+      { title: "New Zealand" },
+      { title: "Australia" },
+      { title: "UK" },
+      { title: "USA" },
+      { title: "Canada" },
+    ].map((item, idx) => (
+      <motion.div
+        key={idx}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: idx * 0.1 }}
+      >
+        <Card className="shadow-xl rounded-2xl">
+          <CardContent className="p-6 text-center">
+            <h3 className="text-xl font-semibold text-purple-600 mb-3">
+              {item.title}
+            </h3>
+          </CardContent>
+        </Card>
+      </motion.div>
+    ))}
+  </div>
+</section>
 
       {/* About Section */}
       <section id="about" className="max-w-7xl mx-auto py-20 px-6">

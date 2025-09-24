@@ -13,7 +13,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox"
 import { useState } from "react"
 import ResponsiveHeader from "@/components/responsive-header"
-import emailjs from "emailjs-com"
+import emailjs from "@emailjs/browser"
+
 
 export default function Booking() {
   const [formData, setFormData] = useState({

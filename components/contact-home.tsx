@@ -80,13 +80,13 @@ export default function Contact() {
             },
             {
               title: "Call Us",
-              content: "+91 98765 43210\n+91 87654 32109",
+              content: "",
               icon: "📞",
               color: "green",
             },
             {
               title: "Email Us",
-              content: "amberconsultannts084@gmail.com",
+              content: "ainfo.amberconsultants@gmail.com",
               icon: "✉️",
               color: "yellow",
             },

@@ -7,6 +7,7 @@ import ResponsiveHeader from "@/components/responsive-header"
 import About from "@/components/about-home"
 import Contact from "@/components/contact-home"
 import Booking from "@/components/booking-home"
+import Image from "next/image"
 
 
 
@@ -16,41 +17,53 @@ export default function Home() {
    <div className="min-h-screen flex flex-col">
       {/* Header */}
       <ResponsiveHeader />
+{/* Hero Section */}
+<section className="relative flex flex-col justify-center items-center text-center flex-grow bg-gradient-to-r from-green-200 via-purple-200 to-yellow-100 pt-32 pb-20 overflow-hidden">
+  
+  {/* Background Image */}
+  <Image
+    src="images/amber bg.jpeg"
+    alt="Amber Logo Background"
+    fill
+    className="absolute inset-0 object-contain opacity-10 pointer-events-none"
+  />
 
-      {/* Hero Section */}
-      <section className="flex flex-col justify-center items-center text-center flex-grow bg-gradient-to-r from-green-200 via-purple-200 to-yellow-100 pt-32 pb-20">
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-4xl md:text-6xl font-bold text-gray-800 mb-6"
-        >
-          Crafting Gems of Tomorrow
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="text-lg text-gray-700 max-w-2xl mb-8"
-        >
-          Guiding ambitious students towards success in 150+ countries. Reliable, trusted, and always your first choice.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-          className="flex space-x-4"
-        >
-          <a href="/booking" >
-          <Button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-2xl shadow-lg">
-            Get Consultation
-          </Button>
-          </a>
-          <Button className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-2xl shadow-lg">
-            Explore Countries
-          </Button>
-        </motion.div>
-      </section>
+  {/* Content */}
+  <motion.h1
+    initial={{ opacity: 0, y: 40 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+    className="relative text-4xl md:text-6xl font-bold text-gray-800 mb-6"
+  >
+    Crafting Gems of Tomorrow
+  </motion.h1>
+
+  <motion.p
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.5, duration: 0.8 }}
+    className="relative text-lg text-gray-700 max-w-2xl mb-8"
+  >
+    Guiding ambitious students towards success in 150+ countries. Reliable, trusted, and always your first choice.
+  </motion.p>
+
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.8, duration: 0.8 }}
+    className="relative flex space-x-4"
+  >
+    <a href="/booking">
+      <Button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-2xl shadow-lg">
+        Get Consultation
+      </Button>
+    </a>
+    <Button className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-2xl shadow-lg">
+      Explore Countries
+    </Button>
+  </motion.div>
+</section>
+
       {/* Country Section */}
 <section id="about" className="max-w-7xl mx-auto py-20 px-6">
   

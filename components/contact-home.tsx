@@ -86,7 +86,7 @@ export default function Contact() {
             },
             {
               title: "Email Us",
-              content: "ainfo.amberconsultants@gmail.com",
+              content: "info.amberconsultants@gmail.com",
               icon: "✉️",
               color: "yellow",
             },

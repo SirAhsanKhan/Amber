@@ -19,14 +19,6 @@ export default function Home() {
       <ResponsiveHeader />
 {/* Hero Section */}
 <section className="relative flex flex-col justify-center items-center text-center flex-grow bg-gradient-to-r from-green-200 via-purple-200 to-yellow-100 pt-32 pb-20 overflow-hidden">
-  
-  {/* Background Image */}
-  <Image
-    src="images/amber bg.jpeg"
-    alt="Amber Logo Background"
-    fill
-    className="absolute inset-0 object-contain opacity-10 pointer-events-none"
-  />
 
   {/* Content */}
   <motion.h1

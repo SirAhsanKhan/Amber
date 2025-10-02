@@ -6,7 +6,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import ResponsiveHeader from "@/components/responsive-header"
 import About from "@/components/about-home"
 import Contact from "@/components/contact-home"
-import Booking from "@/components/booking-home"
 import Image from "next/image"
 
 
@@ -56,21 +55,21 @@ export default function Home() {
   </motion.div>
 </section>
 
-      {/* Country Section */}
+
+{/* Country Section - Option 3 (Flag Icons Above Names) */}
 <section id="about" className="max-w-7xl mx-auto py-20 px-6">
-  
   <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
     {[
-      { title: "France" },
-      { title: "Turkey" },
-      { title: "Sweden" },
-      { title: "Netherlands" },
-      { title: "Singapore" },
-      { title: "New Zealand" },
-      { title: "Australia" },
-      { title: "UK" },
-      { title: "USA" },
-      { title: "Canada" },
+      { title: "France", flag: "/images/flags/france.png" },
+      { title: "Turkey", flag: "/images/flags/turkey.png" },
+      { title: "Sweden", flag: "/images/flags/sweden.png" },
+      { title: "Netherlands", flag: "/images/flags/netherlands.png" },
+      { title: "Singapore", flag: "/images/flags/singapore.png" },
+      { title: "New Zealand", flag: "/images/flags/new-zealand.png" },
+      { title: "Australia", flag: "/images/flags/australia.png" },
+      { title: "UK", flag: "/images/flags/uk.png" },
+      { title: "USA", flag: "/images/flags/usa.png" },
+      { title: "Canada", flag: "/images/flags/canada.png" },
     ].map((item, idx) => (
       <motion.div
         key={idx}
@@ -80,16 +79,25 @@ export default function Home() {
         transition={{ delay: idx * 0.1 }}
       >
         <Card className="shadow-xl rounded-2xl">
-          <CardContent className="p-6 text-center">
-            <h3 className="text-xl font-semibold text-purple-600 mb-3">
-              {item.title}
-            </h3>
+          <CardContent className="p-6 text-center flex flex-col items-center">
+            {/* Flag above name */}
+            <div className="w-12 h-8 mb-4 relative">
+              <Image
+                src={item.flag}
+                alt={`${item.title} flag`}
+                fill
+                className="rounded shadow-sm object-cover"
+              />
+            </div>
+            <h3 className="text-xl font-semibold text-purple-600">{item.title}</h3>
           </CardContent>
         </Card>
       </motion.div>
     ))}
   </div>
 </section>
+
+
 
       {/* About Section */}
       <section id="about" className="max-w-7xl mx-auto py-20 px-6">
@@ -146,50 +154,43 @@ export default function Home() {
       </section>
 
       <About /> 
-      <Booking /> 
       <Contact /> 
 
       {/* Footer */}
-      <footer className="bg-purple-700 text-white py-10 mt-auto">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
-          <div>
-            <h3 className="text-xl font-bold mb-3">Amber Education Consultants</h3>
-            <p className="text-sm">Crafting Gems of Tomorrow. Guiding students towards global success.</p>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-3">Quick Links</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a href="/" className="hover:underline">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="/about" className="hover:underline">
-                  About
-                </a>
-              </li>
-              <li>
-                <a href="/booking" className="hover:underline">
-                  Booking
-                </a>
-              </li>
-              <li>
-                <a href="/contact" className="hover:underline">
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-3">Connect With Us</h4>
-            <p className="text-sm">Facebook | Instagram | LinkedIn</p>
-          </div>
-        </div>
-        <div className="text-center text-xs text-gray-200 mt-6">
-          © {new Date().getFullYear()} Amber Education Consultants. All Rights Reserved.
-        </div>
-      </footer>
+<footer className="bg-purple-700 text-white py-10 mt-auto">
+  <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+    <div className="text-left max-w-sm">
+      <h3 className="text-xl font-bold mb-3">Amber Education Consultants</h3>
+      <p className="text-sm">
+        Crafting Gems of Tomorrow. <br/>
+        Guiding students towards global success.
+      </p>
+    </div>
+
+    {/* Quick Links */}
+    <div>
+      <h4 className="font-semibold mb-3">Quick Links</h4>
+      <ul className="space-y-2 text-sm">
+        <li><a href="/" className="hover:underline">Home</a></li>
+        <li><a href="/about" className="hover:underline">About</a></li>
+        <li><a href="/booking" className="hover:underline">Booking</a></li>
+        <li><a href="/contact" className="hover:underline">Contact</a></li>
+      </ul>
+    </div>
+
+    {/* Social links */}
+    <div>
+      <h4 className="font-semibold mb-3">Connect With Us</h4>
+      <p className="text-sm">Facebook | Instagram | LinkedIn</p>
+    </div>
+  </div>
+
+  {/* Footer Bottom */}
+  <div className="text-center text-xs text-gray-200 mt-6">
+    © {new Date().getFullYear()} Amber Education Consultants. All Rights Reserved.
+  </div>
+</footer>
+
 
     </div>
     

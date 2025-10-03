@@ -21,7 +21,7 @@ export default function Home() {
     <Image
     width={0}
     height={0}
-    src="/images/banner.jpg"
+    src="/images/banner.JPG"
     alt="Amber Education Banner"
     className="
       w-full h-auto max-h-[90vh]

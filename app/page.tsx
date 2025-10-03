@@ -17,7 +17,10 @@ export default function Home() {
       {/* Header */}
       <ResponsiveHeader />
 <section className="w-full pt-24 pl-5">
-  <img
+  <div>
+    <Image
+    width={0}
+    height={0}
     src="/images/banner.jpg"
     alt="Amber Education Banner"
     className="
@@ -27,6 +30,7 @@ export default function Home() {
       transition-transform duration-500
     "
   />
+  </div>
 </section>
 
 

@@ -16,44 +16,20 @@ export default function Home() {
    <div className="min-h-screen flex flex-col">
       {/* Header */}
       <ResponsiveHeader />
-{/* Hero Section */}
-<section className="relative flex flex-col justify-center items-center text-center flex-grow bg-gradient-to-r from-green-200 via-purple-200 to-yellow-100 pt-32 pb-20 overflow-hidden">
-
-  {/* Content */}
-  <motion.h1
-    initial={{ opacity: 0, y: 40 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8 }}
-    className="relative text-4xl md:text-6xl font-bold text-gray-800 mb-6"
-  >
-    Crafting Gems of Tomorrow
-  </motion.h1>
-
-  <motion.p
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ delay: 0.5, duration: 0.8 }}
-    className="relative text-lg text-gray-700 max-w-2xl mb-8"
-  >
-    Guiding ambitious students towards success in 150+ countries. Reliable, trusted, and always your first choice.
-  </motion.p>
-
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.8, duration: 0.8 }}
-    className="relative flex space-x-4"
-  >
-    <a href="/booking">
-      <Button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-2xl shadow-lg">
-        Get Consultation
-      </Button>
-    </a>
-    <Button className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-2xl shadow-lg">
-      Explore Countries
-    </Button>
-  </motion.div>
+<section className="w-full pt-24 pl-5">
+  <img
+    src="/images/banner.jpg"
+    alt="Amber Education Banner"
+    className="
+      w-full h-auto max-h-[90vh]
+      object-cover object-top
+      scale-125 sm:scale-110 md:scale-100
+      transition-transform duration-500
+    "
+  />
 </section>
+
+
 
 
 {/* Country Section - Option 3 (Flag Icons Above Names) */}

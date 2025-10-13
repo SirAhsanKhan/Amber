@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Menu } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function ResponsiveHeader() {
   const [isOpen, setIsOpen] = useState(false)
@@ -15,6 +16,7 @@ export default function ResponsiveHeader() {
     { href: "/about", label: "About" },
     { href: "/booking", label: "Booking" },
     { href: "/contact", label: "Contact" },
+    { href: "/services", label: "Services" },
   ]
 
   return (
@@ -80,8 +82,12 @@ export default function ResponsiveHeader() {
               </nav>
 
               <div className="pt-6 border-t">
-                <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">Get Consultation</Button>
-              </div>
+      <Link href="/booking">
+           <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">
+                Get Consultation
+          </Button>
+              </Link>
+                  </div>
             </div>
           </SheetContent>
         </Sheet>

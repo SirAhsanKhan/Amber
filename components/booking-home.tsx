@@ -227,6 +227,10 @@ export default function Booking() {
                           <SelectItem value="visa">Visa Consultation</SelectItem>
                           <SelectItem value="study-abroad">Study Abroad Planning</SelectItem>
                           <SelectItem value="scholarship">Scholarship Guidance</SelectItem>
+                          <SelectItem value="admission">Admission Assistance</SelectItem>
+                          <SelectItem value="ielts">IELTS Training</SelectItem>
+                          <SelectItem value="departure">Pre-Departure Briefing</SelectItem>
+                          <SelectItem value="insurance">Travel, Forex & Insurance</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>

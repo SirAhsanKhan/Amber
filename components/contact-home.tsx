@@ -1,14 +1,10 @@
 "use client"
 
 import type React from "react"
-
-import { motion } from "framer-motion"
-
+import { color, motion } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-
 import { useState } from "react"
 import ResponsiveHeader from "@/components/responsive-header"
-
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -36,13 +32,13 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log("Contact form submitted:", formData)
-    // Handle form submission here
   }
 
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <ResponsiveHeader/>
+      <ResponsiveHeader />
+
       {/* Hero Section */}
       <section className="flex flex-col justify-center items-center text-center bg-gradient-to-r from-green-200 via-purple-200 to-yellow-100 pt-32 pb-20">
         <motion.h1
@@ -53,6 +49,7 @@ export default function Contact() {
         >
           Get In Touch
         </motion.h1>
+
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -62,6 +59,16 @@ export default function Contact() {
           Ready to start your international education journey? Contact our expert team for personalized guidance and
           support.
         </motion.p>
+
+        {/* WhatsApp CTA (page-level is OK) */}
+        <a
+          href="https://wa.me/923291406836?text=Hello%20Amber%20Consultants,%20I%20would%20like%20to%20get%20guidance%20for%20study%20abroad."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full shadow-lg transition text-lg"
+        >
+          💬 Chat on WhatsApp
+        </a>
       </section>
 
       {/* Contact Information */}
@@ -110,32 +117,72 @@ export default function Contact() {
         </div>
       </section>
 
-      
       {/* Office Hours */}
       <section className="max-w-7xl mx-auto py-16 px-6">
-        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
           <Card className="shadow-lg rounded-2xl">
             <CardContent className="p-8 text-center">
-              <h3 className="text-2xl font-bold text-gray-800 mb-6">Office Hours</h3>
+              <h3 className="text-2xl font-bold text-gray-800 mb-6">
+                Office Hours
+              </h3>
+
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <h4 className="font-semibold text-purple-600 mb-2">Weekdays</h4>
-                  <p className="text-gray-600">Monday - Friday: 10:00 AM - 8:00 PM</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-green-600 mb-2">Weekends</h4>
+                  <h4 className="font-semibold text-purple-600 mb-2">
+                    Weekdays
+                  </h4>
                   <p className="text-gray-600">
-                    Saturday: 11:00 AM - 8:00 PM
+                    Monday – Friday: 10:00 AM – 8:00 PM
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-green-600 mb-2">
+                    Weekends
+                  </h4>
+                  <p className="text-gray-600">
+                    Saturday: 11:00 AM – 8:00 PM
                     <br />
                     Sunday: Closed
                   </p>
                 </div>
               </div>
-              <p className="text-sm text-gray-500 mt-4">Emergency consultations available by appointment</p>
             </CardContent>
           </Card>
         </motion.div>
       </section>
+
+{/* Google Maps */}
+<section className="w-full py-16">
+  <motion.div
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+  >
+    <Card className="shadow-lg rounded-none md:rounded-2xl overflow-hidden max-w-7xl mx-auto">
+      <CardHeader className="px-6">
+        <CardTitle className="text-center text-2xl font-bold text-gray-800">
+          Find Us on Google Maps
+        </CardTitle>
+      </CardHeader>
+
+      {/* Responsive Map Wrapper */}
+      <div className="relative w-full aspect-[16/9] md:aspect-[21/9]">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d226.1620830253167!2d67.08202131092546!3d24.911849636114304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33f28b591b5c3%3A0xf9dc695be971374!2sCeltic%20Consultants%20-%20Head%20Office!5e0!3m2!1sen!2s!4v1767527171193!5m2!1sen!2s"
+          className="absolute inset-0 h-full w-full border-0"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          allowFullScreen
+        />
+      </div>
+    </Card>
+  </motion.div>
+</section>
     </div>
   )
 }

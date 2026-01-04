@@ -76,7 +76,7 @@ export default function Contact() {
             },
             {
               title: "Call Us",
-              content: "",
+              content: "+92 329 1406836",
               icon: "📞",
               color: "green",
             },

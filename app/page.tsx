@@ -21,7 +21,7 @@ export default function Home() {
   <div className="relative w-full">
     {/* Desktop */}
     <Image
-      src="/images/banner.jpg"
+      src="/images/banner.JPG"
       alt="Amber Education Banner"
       width={1920}
       height={800}

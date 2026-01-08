@@ -17,25 +17,29 @@ export default function Home() {
    <div className="min-h-screen flex flex-col">
       {/* Header */}
       <ResponsiveHeader />
-<section className="w-full pt-24 pl-5">
-  <div>
+<section className="w-full pt-24">
+  <div className="relative w-full">
+    {/* Desktop */}
     <Image
-    width={0}
-    height={0}
-    src="/images/banner.JPG"
-    alt="Amber Education Banner"
-    className="
-      w-full h-auto max-h-[90vh]
-      object-cover object-top
-      scale-125 sm:scale-110 md:scale-100
-      transition-transform duration-500
-    "
-  />
+      src="/images/banner.jpg"
+      alt="Amber Education Banner"
+      width={1920}
+      height={800}
+      priority
+      className="hidden md:block w-full h-auto object-cover"
+    />
+
+    {/* Mobile */}
+    <Image
+      src="/images/banner-mob.jpg"
+      alt="Amber Education Banner"
+      width={750}
+      height={1200}
+      priority
+      className="block md:hidden w-full h-auto object-cover"
+    />
   </div>
 </section>
-
-
-
 
 {/* Country Section -(Flag Icons Above Names) */}
 <section id="about" className="max-w-7xl mx-auto py-20 px-6">

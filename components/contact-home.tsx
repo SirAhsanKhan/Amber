@@ -155,52 +155,8 @@ export default function Contact() {
           </Card>
         </motion.div>
       </section>
-
-{/* Google Maps */}
-<section className="w-full py-16">
-  <motion.div
-    initial={{ opacity: 0, y: 40 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-  >
-    <Card className="shadow-lg rounded-none md:rounded-2xl overflow-hidden max-w-7xl mx-auto">
-      <CardHeader className="px-6">
-        <CardTitle className="text-center text-2xl font-bold text-gray-800">
-          Find Us on Google Maps
-        </CardTitle>
-      </CardHeader>
-
-      {/* Clickable Map */}
-      <a
-        href="https://www.google.com/maps/dir/?api=1&destination=Celtic+Consultants+Head+Office+Karachi"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Open location in Google Maps"
-        className="relative block w-full aspect-[16/9] md:aspect-[21/9]"
-      >
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d226.1620830253167!2d67.08202131092546!3d24.911849636114304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33f28b591b5c3%3A0xf9dc695be971374!2sCeltic%20Consultants%20-%20Head%20Office!5e0!3m2!1sen!2s!4v1767527171193!5m2!1sen!2s"
-          className="absolute inset-0 h-full w-full border-0 pointer-events-none"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          allowFullScreen
-        />
-      </a>
-
-      {/* Get Directions Button */}
-      <div className="flex justify-center py-6">
-        <a
-          href="https://www.google.com/maps/dir/?api=1&destination=Celtic+Consultants+Head+Office+Karachi"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full shadow-md transition"
-        >
-          🧭 Get Directions
-        </a>
       </div>
-    </Card>
-  </motion.div>
-</section>
-    </div>
-  )
-}
+      )
+    }
+
+

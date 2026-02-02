@@ -24,16 +24,25 @@ export default function ResponsiveHeader() {
       <div className="max-w-7xl mx-auto flex items-center justify-between p-4">
         {/* Logo */}
         <a href="/">
-        <div className="flex items-center space-x-3">
-          <Image
-            src="/images/amber-logo.png"
-            alt="Amber Education Logo"
-            width={40}
-            height={40}
-            className="rounded-full"
-          />
-          <span className="font-bold text-xl text-gray-800">Amber Education</span>
+       <div className="flex items-center space-x-3">
+        <Image
+          src="/images/amber-logo.png"
+          alt="Amber Education Logo"
+          width={40}
+          height={40}
+          className="rounded-full"
+        />
+
+        <div className="flex flex-col leading-tight">
+          <span className="font-bold text-xl text-gray-800">
+          Amber Consultants
+          </span>
+          <span className="text-sm italic text-gray-500">
+          Crafting Gems of Tomorrow
+          </span>
         </div>
+      </div>
+
         </a>
 
         {/* Desktop Navigation */}

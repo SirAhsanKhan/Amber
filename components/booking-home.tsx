@@ -1,314 +1,226 @@
 "use client"
 
-import type React from "react"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import React, { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
-import { useState } from "react"
 import ResponsiveHeader from "@/components/responsive-header"
-import emailjs from "@emailjs/browser"
 
 export default function Booking() {
+  const [step, setStep] = useState(1)
+  const [error, setError] = useState("")
+
   const [formData, setFormData] = useState({
     firstName: "",
-    lastName: "",
-    email: "",
     phone: "",
-    country: "",
     studyDestination: "",
     studyLevel: "",
     preferredDate: "",
     preferredTime: "",
-    consultationType: "",
-    message: "",
-    agreeToTerms: false,
   })
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const totalSteps = 3
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (isSubmitting) return
-    setIsSubmitting(true)
+  const validateStep = () => {
+    setError("")
 
-    emailjs
-      .send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        formData,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-      )
-      .then(() => {
-        alert("Your consultation booking has been sent successfully ✅")
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          phone: "",
-          country: "",
-          studyDestination: "",
-          studyLevel: "",
-          preferredDate: "",
-          preferredTime: "",
-          consultationType: "",
-          message: "",
-          agreeToTerms: false,
-        })
-      })
-      .catch((error) => {
-        console.error("EmailJS Error:", error)
-        alert("Oops! Something went wrong. Please try again ❌")
-      })
-      .finally(() => {
-        setIsSubmitting(false)
-      })
+    if (step === 1) {
+      if (!formData.firstName || !formData.phone) {
+        setError("Please fill all fields")
+        return false
+      }
+
+      const phoneRegex = /^03[0-9]{9}$/
+      if (!phoneRegex.test(formData.phone)) {
+        setError("Enter valid Pakistani number (03XXXXXXXXX)")
+        return false
+      }
+    }
+
+    if (step === 2) {
+      if (!formData.studyDestination || !formData.studyLevel) {
+        setError("Please select your preferences")
+        return false
+      }
+    }
+
+    if (step === 3) {
+      if (!formData.preferredDate || !formData.preferredTime) {
+        setError("Please select date & time")
+        return false
+      }
+    }
+
+    return true
+  }
+
+  const nextStep = () => {
+    if (!validateStep()) return
+    setStep((prev) => Math.min(prev + 1, totalSteps))
+  }
+
+  const prevStep = () => {
+    setError("")
+    setStep((prev) => Math.max(prev - 1, 1))
+  }
+
+  const handleSubmit = () => {
+    if (!validateStep()) return
+
+    const message = `Hello, I want to book a consultation:%0A
+Name: ${formData.firstName}%0A
+Phone: ${formData.phone}%0A
+Destination: ${formData.studyDestination}%0A
+Study Level: ${formData.studyLevel}%0A
+Date: ${formData.preferredDate}%0A
+Time: ${formData.preferredTime}`
+
+    window.open(`https://wa.me/923220303474?text=${message}`, "_blank")
   }
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Header */}
       <ResponsiveHeader />
 
-      {/* Hero Section */}
-      <section className="flex flex-col justify-center items-center text-center bg-gradient-to-r from-green-200 via-purple-200 to-yellow-100 pt-32 pb-20">
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-4xl md:text-6xl font-bold text-gray-800 mb-6"
-        >
-          Book Your Consultation
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="text-lg text-gray-700 max-w-3xl mb-8"
-        >
-          Take the first step towards your international education journey. Schedule a personalized consultation with
-          our expert advisors.
-        </motion.p>
+      <section className="text-center bg-gradient-to-r from-green-200 via-purple-200 to-yellow-100 pt-32 pb-16 px-4">
+        <h1  className="text-4xl md:text-6xl font-bold text-gray-800 mb-6">Book Your Consultation</h1>
+        <p className="text-gray-700">Simple 3-step process. Takes less than 30 seconds.</p>
       </section>
 
-      {/* Booking Form */}
-      <section className="bg-gray-50 py-20">
-        <div className="max-w-4xl mx-auto px-6">
-          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <Card className="shadow-xl rounded-2xl">
-              <CardHeader className="bg-gradient-to-r from-purple-600 to-green-600 text-white rounded-t-2xl">
-                <CardTitle className="text-2xl text-center">Schedule Your Consultation</CardTitle>
-              </CardHeader>
-              <CardContent className="p-8">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Personal Info */}
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="firstName">First Name *</Label>
-                      <Input
-                        id="firstName"
-                        value={formData.firstName}
-                        onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                        required
-                        className="rounded-xl"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName">Last Name *</Label>
-                      <Input
-                        id="lastName"
-                        value={formData.lastName}
-                        onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                        required
-                        className="rounded-xl"
-                      />
-                    </div>
-                  </div>
+      <section className="flex justify-center items-center py-16 px-4">
+        <Card className="w-full max-w-xl shadow-2xl rounded-2xl">
+          <CardContent className="p-8">
 
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email Address *</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        required
-                        className="rounded-xl"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Phone Number *</Label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        required
-                        className="rounded-xl"
-                      />
-                    </div>
-                  </div>
+            {/* Progress */}
+            <div className="w-full bg-gray-200 rounded-full h-2 mb-6">
+              <div
+                className="bg-gradient-to-r from-purple-600 to-green-500 h-2 rounded-full transition-all"
+                style={{ width: `${(step / totalSteps) * 100}%` }}
+              />
+            </div>
 
-                  {/* Country & Destination */}
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label>Current Country *</Label>
-                      <Select value={formData.country} onValueChange={(value) => setFormData({ ...formData, country: value })}>
-                        <SelectTrigger className="rounded-xl">
-                          <SelectValue placeholder="Select your country" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="india">India</SelectItem>
-                          <SelectItem value="pakistan">Pakistan</SelectItem>
-                          <SelectItem value="bangladesh">Bangladesh</SelectItem>
-                          <SelectItem value="nepal">Nepal</SelectItem>
-                          <SelectItem value="sri-lanka">Sri Lanka</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Preferred Study Destination *</Label>
-                      <Select
-                        value={formData.studyDestination}
-                        onValueChange={(value) => setFormData({ ...formData, studyDestination: value })}
-                      >
-                        <SelectTrigger className="rounded-xl">
-                          <SelectValue placeholder="Select destination" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="usa">United States</SelectItem>
-                          <SelectItem value="canada">Canada</SelectItem>
-                          <SelectItem value="uk">United Kingdom</SelectItem>
-                          <SelectItem value="australia">Australia</SelectItem>
-                          <SelectItem value="germany">Germany</SelectItem>
-                          <SelectItem value="france">France</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
+            {error && (
+              <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
+            )}
 
-                  {/* Study Level & Type */}
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label>Study Level *</Label>
-                      <Select
-                        value={formData.studyLevel}
-                        onValueChange={(value) => setFormData({ ...formData, studyLevel: value })}
-                      >
-                        <SelectTrigger className="rounded-xl">
-                          <SelectValue placeholder="Select study level" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="undergraduate">Undergraduate</SelectItem>
-                          <SelectItem value="postgraduate">Postgraduate</SelectItem>
-                          <SelectItem value="phd">PhD</SelectItem>
-                          <SelectItem value="diploma">Diploma</SelectItem>
-                          <SelectItem value="language">Language Course</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Consultation Type *</Label>
-                      <Select
-                        value={formData.consultationType}
-                        onValueChange={(value) => setFormData({ ...formData, consultationType: value })}
-                      >
-                        <SelectTrigger className="rounded-xl">
-                          <SelectValue placeholder="Select consultation type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="visa">Visa Consultation</SelectItem>
-                          <SelectItem value="study-abroad">Study Abroad Planning</SelectItem>
-                          <SelectItem value="scholarship">Scholarship Guidance</SelectItem>
-                          <SelectItem value="admission">Admission Assistance</SelectItem>
-                          <SelectItem value="ielts">IELTS Training</SelectItem>
-                          <SelectItem value="departure">Pre-Departure Briefing</SelectItem>
-                          <SelectItem value="insurance">Travel, Forex & Insurance</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
+            <AnimatePresence mode="wait">
 
-                  {/* Date & Time */}
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label>Preferred Date *</Label>
-                      <Input
-                        type="date"
-                        value={formData.preferredDate}
-                        onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
-                        required
-                        className="rounded-xl"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Preferred Time *</Label>
-                      <Select
-                        value={formData.preferredTime}
-                        onValueChange={(value) => setFormData({ ...formData, preferredTime: value })}
-                      >
-                        <SelectTrigger className="rounded-xl">
-                          <SelectValue placeholder="Select time slot" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="9am">9:00 AM - 10:00 AM</SelectItem>
-                          <SelectItem value="10am">10:00 AM - 11:00 AM</SelectItem>
-                          <SelectItem value="11am">11:00 AM - 12:00 PM</SelectItem>
-                          <SelectItem value="2pm">2:00 PM - 3:00 PM</SelectItem>
-                          <SelectItem value="3pm">3:00 PM - 4:00 PM</SelectItem>
-                          <SelectItem value="4pm">4:00 PM - 5:00 PM</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
+              {/* STEP 1 */}
+              {step === 1 && (
+                <motion.div key="step1" initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50 }} className="space-y-4">
+                  <h2 className="text-xl font-bold">Basic Information</h2>
 
-                  {/* Message */}
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Additional Message</Label>
-                    <Textarea
-                      id="message"
-                      placeholder="Tell us about your goals, concerns, or any specific questions you have..."
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="rounded-xl min-h-[100px]"
+                  <div>
+                    <Label>Name</Label>
+                    <Input
+                      placeholder="e.g. Ali Khan"
+                      value={formData.firstName}
+                      onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                     />
                   </div>
 
-                  {/* Terms */}
-                  <div className="flex items-center space-x-2 ">
-                    <Checkbox
-                      id="terms"
-                      className="bg-black"
-                      checked={formData.agreeToTerms}
-                      onCheckedChange={(checked) => setFormData({ ...formData, agreeToTerms: checked as boolean })}
+                  <div>
+                    <Label>Phone</Label>
+                    <Input
+                      placeholder="03XXXXXXXXX"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     />
-                    <Label htmlFor="terms" className="text-sm text-gray-600">
-                      I agree to the Terms of Service and Privacy Policy *
-                    </Label>
                   </div>
 
-                  {/* Submit Button */}
-                  <Button
-                    type="submit"
-                    disabled={!formData.agreeToTerms || isSubmitting}
-                    className={`w-full bg-gradient-to-r from-purple-600 to-green-600 hover:from-purple-700 hover:to-green-700 
-                      text-white py-3 rounded-xl text-lg font-semibold 
-                      ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
-                  >
-                    {isSubmitting ? "Submitting..." : "Book My Consultation"}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
+                  <Button onClick={nextStep} className="w-full">Continue</Button>
+                </motion.div>
+              )}
+
+              {/* STEP 2 */}
+              {step === 2 && (
+                <motion.div key="step2" initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50 }} className="space-y-4">
+                  <h2 className="text-xl font-bold">Study Preferences</h2>
+
+                  <div>
+                    <Label>Destination</Label>
+                    <Select value={formData.studyDestination} onValueChange={(value) => setFormData({ ...formData, studyDestination: value })}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select country" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="uk">UK</SelectItem>
+                        <SelectItem value="canada">Canada</SelectItem>
+                        <SelectItem value="australia">Australia</SelectItem>
+                        <SelectItem value="netherlands">Netherlands</SelectItem>
+                        <SelectItem value="new-zealand">New Zealand</SelectItem>
+                        <SelectItem value="singapore">Singapore</SelectItem>
+                        <SelectItem value="sweden">Sweden</SelectItem>
+                        <SelectItem value="turkey">Turkey</SelectItem>
+                        <SelectItem value="usa">USA</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <Label>Study Level</Label>
+                    <Select value={formData.studyLevel} onValueChange={(value) => setFormData({ ...formData, studyLevel: value })}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select level" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="undergraduate">Undergraduate</SelectItem>
+                        <SelectItem value="postgraduate">Postgraduate</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="flex gap-3">
+                    <Button variant="outline" onClick={prevStep}>Back</Button>
+                    <Button onClick={nextStep} className="w-full">Continue</Button>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* STEP 3 */}
+              {step === 3 && (
+                <motion.div key="step3" initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -50 }} className="space-y-4">
+                  <h2 className="text-xl font-bold">Schedule</h2>
+
+                  <div>
+                    <Label>Date</Label>
+                    <Input
+                      type="date"
+                      value={formData.preferredDate}
+                      onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
+                    />
+                  </div>
+
+                  <div>
+                    <Label>Time</Label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {["10 AM", "11 AM", "2 PM", "3 PM"].map((time) => (
+                        <button
+                          key={time}
+                          onClick={() => setFormData({ ...formData, preferredTime: time })}
+                          className={`border p-2 rounded-lg transition ${formData.preferredTime === time ? "bg-purple-600 text-white border-purple-600" : "hover:bg-purple-100"}`}
+                        >
+                          {time}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3">
+                    <Button variant="outline" onClick={prevStep}>Back</Button>
+                    <Button onClick={handleSubmit} className="w-full bg-green-600 hover:bg-green-700">
+                      Confirm & Chat on WhatsApp
+                    </Button>
+                  </div>
+                </motion.div>
+              )}
+
+            </AnimatePresence>
+          </CardContent>
+        </Card>
       </section>
     </div>
   )

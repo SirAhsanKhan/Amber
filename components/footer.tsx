@@ -41,7 +41,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="https://www.instagram.com/amber.consultants?igsh=a3JiZHc2bHJjaXQ5&utm_source=qr"
+              href="https://www.instagram.com/amberconsultantss/"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-pink-600 hover:bg-pink-700 text-white p-3 rounded-full transition"
